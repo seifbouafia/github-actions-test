@@ -5,9 +5,13 @@ on:
     branches:
       - main
 
+
 jobs:
   merge:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: github-action-angular
 
     steps:
       - name: Checkout code
@@ -17,9 +21,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "18.x"
-
-      - name: Navigate to project directory
-        run: cd "github-action-angular"
 
       - name: Install dependencies
         run: npm install
