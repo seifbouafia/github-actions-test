@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+
+    paths:
+      - github-action-angular/**
+
   workflow_dispatch:
 
 jobs:
