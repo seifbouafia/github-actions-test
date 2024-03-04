@@ -5,8 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",,
-    "lint": "ng lint",
+    "watch": "ng build --watch --configuration development",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "ng test",
     "serve:ssr:github-action-angular": "node dist/github-action-angular/server/server.mjs"
   },
