@@ -5,53 +5,23 @@ on:
     branches:
       - main
 
-    paths:
-      - github-action-angular/**
-
-  workflow_dispatch:
-
 jobs:
   merge:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: github-action-angular
-
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      # Setup Nodejs
-      - name: Setup Node.js 16
+      - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "16.x"
-          cache: 'npm'
-          cache-dependency-path: github-action-angular/yarn.lock
+          node-version: '18.x'
 
-      # Install Yarn
-      - name: Install Yarn
-        run: npm install --global yarn
-
-      # Install libraries
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm install
 
-      # Run linting
-      - name: Run linting
-        run: yarn lint
-
-      # Compile the code
-      - name: Build project
-        run: yarn build
-
-      # Run tests
-      - name: Run tests
-        run: yarn test
-
-      - run: git config user.email "seifbouafia340@gmail.com"
-      - run: git config user.name "@github-ci"
-      - run: yarn version --patch --message "Bump version to %s"
-
-      - run: git push
-      - run: git push --follow-tags
+      - name: Linting and testing
+        run: |
+          npm run lint
+          npm run test
